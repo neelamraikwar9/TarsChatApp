@@ -1,42 +1,52 @@
-import React, { useState } from "react";
-import axios from "axios";
+// import React, { useState, useEffect } from "react";
+// import axios from "axios";
 import { useUser } from "../context/userProvider";
+// import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+//   const [email, setEmail] = useState("");
+//   const [password, setPassword] = useState("");
+//   const navigate = useNavigate(); 
 
-  const { setUser } = useUser();
+  const { handleLogin, email, setEmail, password, setPassword } = useUser();
 
-  const handleLogin = async (e) => {
-    e.preventDefault(); 
+//   const handleLogin = async (e) => {
+//     e.preventDefault();
 
-    try {
-      const { data } = await axios.post("http://localhost:5000/auth/login", {
-        username,
-        password,
-      });
-      setUser(data);
-    //   setEmail("");
-    //   setPassword("");
-    } catch (error) {
-      console.error(error.response?.data?.message || "Error logging in");
-    }
-  };
+//     try {
+//       const { data } = await axios.post("http://localhost:5000/auth/login", {
+//         email,
+//         password,
+//       });
+      
+//       useEffect(() => {
+//         setUser(data);
+//         navigate("/chat");
+//       }, []); 
+      
+      
+
+//       //   setEmail("");
+//       //   setPassword("");
+//     } catch (error) {
+//       console.error(error.response?.data?.message || "Error logging in");
+//     }
+//   };
 
   return (
     <form onSubmit={handleLogin}>
-      <h2>Login</h2>
+      <h2>Tars Chat App</h2>
       <p>Login with your credentials to continue.</p>
 
       <div>
         <label>Email: </label>
         <input
-          type="text"
+          type="email"
           placeholder="Email"
           value={email}
           className="form-control form-control-lg mt-3"
           onChange={(e) => setEmail(e.target.value)}
+          required
         />
       </div>
       <br />
@@ -49,10 +59,12 @@ const Login = () => {
           value={password}
           className="form-control form-control-lg mt-3"
           onChange={(e) => setPassword(e.target.value)}
+          required
         />
       </div>
+      <br />
 
-      <button className="btn btn-success btn-lg mt-3" type="submit">
+      <button type="submit">
         Login
       </button>
     </form>
